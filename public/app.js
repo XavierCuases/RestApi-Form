@@ -3,31 +3,30 @@ function getAllUsers() {
         .then(response => response.json())
         .then(data => {
             const usersList = document.getElementById('usersList');
-            usersList.innerHTML = ''; 
-            Object.keys(data).forEach(key => {
-                const user = data[key];
+            usersList.innerHTML = '';
+            data.forEach(user => {
                 const li = document.createElement('li');
-                li.textContent = `ID: ${key}, Nombre: ${user.name}, Edad: ${user.age}`;
+                li.textContent = `ID: ${user.id}, Nombre: ${user.name}, Edad: ${user.age}`;
                 usersList.appendChild(li);
             });
-        });
+        })
+        .catch(error => console.error('Error fetching users:', error));
 }
-
 
 function createUser() {
     const name = document.getElementById('createName').value;
     const age = document.getElementById('createAge').value;
     fetch('/users', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, age })
-    }).then(response => response.json())
-      .then(data => {
-          console.log(data);
-          getAllUsers(); 
-      });
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, age }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('User created:', data);
+            getAllUsers();
+        })
+        .catch(error => console.error('Error creating user:', error));
 }
 
 function updateUser() {
@@ -36,24 +35,27 @@ function updateUser() {
     const age = document.getElementById('updateAge').value;
     fetch(`/users/${id}`, {
         method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, age })
-    }).then(response => response.json())
-      .then(data => {
-          console.log(data);
-          getAllUsers(); 
-      });
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, age }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('User updated:', data);
+            getAllUsers();
+        })
+        .catch(error => console.error('Error updating user:', error));
 }
 
 function deleteUser() {
     const id = document.getElementById('deleteId').value;
     fetch(`/users/${id}`, {
-        method: 'DELETE'
-    }).then(() => {
-        getAllUsers();
-    });
+        method: 'DELETE',
+    })
+        .then(() => {
+            console.log('User deleted');
+            getAllUsers();
+        })
+        .catch(error => console.error('Error deleting user:', error));
 }
 
 function getUser() {
@@ -61,7 +63,7 @@ function getUser() {
     fetch(`/users/${id}`)
         .then(response => {
             if (!response.ok) {
-                throw new Error('No se encontró el usuario');
+                throw new Error('User not found');
             }
             return response.json();
         })
@@ -74,4 +76,3 @@ function getUser() {
             result.textContent = error.message;
         });
 }
-

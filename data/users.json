@@ -1,22 +1,12 @@
 {
-  "4": {
-    "name": "Jorge Pérez",
-    "age": 35,
-    "email": "jorge.perez@example.com",
-    "position": "Project Manager"
-  },
   "5": {
-    "name": "jorge Rivera",
-    "age": "34"
+    "name": "Jorge",
+    "age": "37"
   },
   "6": {
     "name": "Edwin Duarte",
     "age": 45,
     "email": "edwin.duarte@example.com",
     "position": "Network Engineer"
-  },
-  "1736744950075": {
-    "name": "Xavier Cuases",
-    "age": "45"
   }
 }
