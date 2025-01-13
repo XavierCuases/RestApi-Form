@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management API</title>
+</head>
+<body>
+    <h1>User Management</h1>
+    <div>
+        <h2>Create User</h2>
+        <input type="text" id="createName" placeholder="Name">
+        <input type="text" id="createAge" placeholder="Age">
+        <button onclick="createUser()">Create User</button>
+    </div>
+    <div>
+        <h2>Update User</h2>
+        <input type="text" id="updateId" placeholder="User ID">
+        <input type="text" id="updateName" placeholder="New Name">
+        <input type="text" id="updateAge" placeholder="New Age">
+        <button onclick="updateUser()">Update User</button>
+    </div>
+    <div>
+        <h2>Delete User</h2>
+        <input type="text" id="deleteId" placeholder="User ID">
+        <button onclick="deleteUser()">Delete User</button>
+    </div>
+    <div>
+        <h2>Get User</h2>
+        <input type="text" id="getId" placeholder="User ID">
+        <button onclick="getUser()">Get User</button>
+        <p id="getUserResult"></p>
+    </div>
+    <div>
+        <h2>User List</h2>
+        <button onclick="getAllUsers()">Refresh List</button>
+        <ul id="usersList"></ul>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

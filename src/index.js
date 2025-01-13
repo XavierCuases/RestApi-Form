@@ -2,9 +2,14 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const app = express();
+const cors = require('cors');
+
 app.use(express.json());
+app.use(express.static('public'));
+app.use(cors());
 
 const usersFilePath = path.join(__dirname, '../data/users.json');
+
 
 function loadUsers() {
     try {
@@ -25,9 +30,10 @@ function saveUsers(users) {
 }
 
 let users = loadUsers();
+let currentId = Object.keys(users).reduce((maxId, id) => Math.max(maxId, parseInt(id, 10)), 0);
 
 app.get('/users', (req, res) => {
-    res.json(users);
+    res.json(Object.values(users));  
 });
 
 app.get('/users/:id', (req, res) => {
@@ -41,14 +47,14 @@ app.get('/users/:id', (req, res) => {
 
 app.post('/users', (req, res) => {
     const newUser = req.body;
-    const newId = Date.now().toString();
+    const newId = ++currentId;  
     users[newId] = newUser;
     saveUsers(users);
-    res.status(201).json(users[newId]);
+    res.status(201).json({id: newId, ...newUser});
 });
 
 app.put('/users/:id', (req, res) => {
-    if (users[req.params.id]) {
+    if (users.hasOwnProperty(req.params.id)) {
         users[req.params.id] = req.body;
         saveUsers(users);
         res.json(users[req.params.id]);
@@ -56,8 +62,9 @@ app.put('/users/:id', (req, res) => {
         res.status(404).send('User not found');
     }
 });
+
 app.delete('/users/:id', (req, res) => {
-    if (users[req.params.id]) {
+    if (users.hasOwnProperty(req.params.id)) {
         delete users[req.params.id];
         saveUsers(users);
         res.status(204).send();
@@ -65,7 +72,6 @@ app.delete('/users/:id', (req, res) => {
         res.status(404).send('User not found');
     }
 });
-
 
 app.get('/', (req, res) => {
     res.send('Welcome to the Users APIRest!');
