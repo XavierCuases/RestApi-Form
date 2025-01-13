@@ -7,6 +7,10 @@ let users = {
     2: { name: "Bob", age: 30 }
 };
 
+app.get('/', (req, res) => {
+    res.send('Welcome to the Users API!');
+});
+
 app.get('/users', (req, res) => {
     res.json(users);
 });
@@ -42,7 +46,6 @@ app.delete('/users/:id', (req, res) => {
     delete users[req.params.id];
     res.status(204).send();
 });
-
 
 
 const PORT = 3000;
