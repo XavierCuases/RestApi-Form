@@ -1,0 +1,27 @@
+{
+    "002": {
+      "name": "Xavier Cuases",
+      "age": 40,
+      "email": "xavier.cuases@example.com",
+      "position": "Software Developer"
+    },
+    "003": {
+      "name": "Jorge Pérez",
+      "age": 35,
+      "email": "jorge.perez@example.com",
+      "position": "Project Manager"
+    },
+    "006": {
+      "name": "Renato Marcillo",
+      "age": 28,
+      "email": "renato.marcillo@example.com",
+      "position": "Data Analyst"
+    },
+    "008": {
+      "name": "Edwin Duarte",
+      "age": 45,
+      "email": "edwin.duarte@example.com",
+      "position": "Network Engineer"
+    }
+  }
+  
